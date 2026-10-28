@@ -1,0 +1,6 @@
+{
+  "name": "SkillSwap AI",
+  "description": "Student Collaboration & Skill Exchange Platform powered by AI team matching, project hub, hackathons, startup incubator, community, and career tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

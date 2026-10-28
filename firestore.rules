@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // User profiles
+    match /users/{uid} {
+      // Koi bhi logged-in user read kar sake
+      allow read: if request.auth != null;
+
+      // Create sirf tab ho jab request.auth.uid == uid aur role "student" ya "teacher" ho
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.role in ['student', 'teacher'];
+
+      // Update sirf apna profile ho aur role badal na sake
+      allow update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.role == resource.data.role;
+
+      // Delete band
+      allow delete: if false;
+    }
+
+    // Baaki saare collections par read/write false
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
